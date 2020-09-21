@@ -2,13 +2,15 @@
 
 namespace App\Providers;
 
+use App\Entry;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use App\Exceptions\InvalidEntrySlugExeption;
 
 class RouteServiceProvider extends ServiceProvider
 {
     /**
-     * This namespace is applied to your controller routes.
+     * This namespace is applied to your controller routes. 
      *
      * In addition, it is set as the URL generator's root namespace.
      *
@@ -30,9 +32,21 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+        
+        Route::bind('entryBySlug', function ($value) {
+            $parts = explode('-',$value);
+            $id = end($parts);
+
+           $entry = Entry::findOrFail($id);
+
+           if($entry->slug.'-'.$entry->id === $value){
+               return $entry;
+           }else{
+               throw new InvalidEntrySlugExeption($entry);
+           }
+
+        });
     }
 
     /**
