@@ -36,12 +36,15 @@ class EntryController extends Controller
         return back()->with(compact('status'));
     }
 
-    public function edit(Entry $entry){
+    public function edit(Entry $entry)
+    {
+        $this->authorize('update', $entry);
         return view('entries.edit', compact('entry'));
     }
 
     public function update(Request $request, Entry $entry)//procesar y validar la informacino para crear registro en la base de datos es de tipo post
     {
+        $this->authorize('update', $entry);
         
         $validatedData=$request->validate([
             'title'=>'required|min:7|max:255|unique:entries,id,'.$entry->id,
@@ -51,7 +54,7 @@ class EntryController extends Controller
         
         $entry->title = $validatedData['title'];
         $entry->content = $validatedData['content'];
-        $entry->save();//este hace el insert
+        $entry->save();//este hace el Update
 
         $status = 'Tu entrada a sido actualizada con éxito';
         return back()->with(compact('status'));

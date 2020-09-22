@@ -14,7 +14,9 @@ Route::post('/entries', 'EntryController@store')->name('entries');
 
 Route::get('/entries/{entryBySlug}', 'GuestController@show');
 
-Route::get('/entries/{entry}/edit', 'EntryController@edit');//forma parte de entry controller por que es algo que debe estar protegido
+Route::get('/entries/{entry}/edit', 'EntryController@edit');
+    //->middleware('can:update,entry');//forma parte de entry controller por que es algo que debe estar protegido
 Route::put('/entries/{entry}', 'EntryController@update');
+    //->middleware('can:update,entry');
 
 Route::get('users/{user}', 'UserController@show');
