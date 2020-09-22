@@ -14,6 +14,9 @@
                         </div>
                     @endif
 
+                    @if($entries->isEmpty())
+                    <p>Aún no has publicado ningun articulo</p>
+                    @else
                    <p>My entries: </p>
                    <ul>
                        @foreach ($entries as $entry)
@@ -23,9 +26,8 @@
                             </a>
                         </li>
                        @endforeach
-
-
-                   </ul>
+                    </ul>
+                    @endif
                 </div>
             </div>
         </div>

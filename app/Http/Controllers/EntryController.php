@@ -22,7 +22,7 @@ class EntryController extends Controller
     {
         //dd($request->all());
         $validatedData=$request->validate([
-            'title'=>'required|min:7|max:255|unique:entries',
+            'title'=>'required|min:7|max:255|unique:entries',//SE DEBE QUITAR UNICO PARA QUE EL TITULO PUEDA PARECERSE A OTRO
             'content'=>'required|min:25|max:3000'
         ]);
 

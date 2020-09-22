@@ -11,7 +11,7 @@
         @endif
         @else
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('entries') }}">New entries</a>
+            <a class="nav-link" href="{{ route('entriesCreate') }}">New entries</a>
         </li>
 
         <li class="nav-item">

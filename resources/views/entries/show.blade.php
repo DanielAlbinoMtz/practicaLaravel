@@ -12,15 +12,25 @@
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
-                    @endif
-
-                    {{$entry->content}}
-                   @can('update', $entry)
                 </div>
+                @endif
+
+                {{$entry->content}}
+
+                @can('update', $entry)
+
                 <div class="text-center">
-                <a href="{{url('/entries/'.$entry->id.'/edit')}}" class="btn btn-primary mb-3">Editar Entrada</a>
+                    <a href="{{url('/entries/'.$entry->id.'/edit')}}" class="btn btn-primary mb-3">Editar Entrada</a>
                 </div>
                 @endcan
+
+                <div class="card-footer">
+                    Autor:
+                    <a href="{{url('@'.$entry->user->username)}}">
+                        {{$entry->user->name}}
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
